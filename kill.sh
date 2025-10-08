@@ -2,7 +2,7 @@
 # Use ps to find the correct process
 
 # PYTHON
-pid=$(ps aux | grep "slideshow/app.py" | awk 'NR==1 {print $2}')
+pid=$(ps aux | grep "app\.py" | awk 'NR==1 {print $2}')
 kill $pid
 # FEH
 pid=$(ps aux | grep "feh" | awk 'NR==1 {print $2}')
