@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="post">
+  <h1 class="post-title">
+    Slideshow
+  </h1>
+
+
+  <p>This is <a href="google.com">just google</a>. </p>
+
+
+  <form method="post" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Name" required><br>
+    <input type="text" name="message" placeholder="Write a message" required><br>
+    <input type="text" name="password" placeholder="Password" required><br>
+    <input type="file" name="images" accept="image/*" multiple required><br>
+    <input type="submit" value="Upload">
+  </form>
+
+  <h2>Latest Image</h2>
+  <div class="image-container">
+    <!-- <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Uploaded image"> -->
+    <img src="{{ url_for('uploaded_file', filename=image) }}" alt="Uploaded image">
+    <p>Image path: {{ url_for('uploaded_file', filename=image) }}</p>
+  </div>
+
+  <h2>Submission Log</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Message</th>
+      <th>Date/Time</th>
+      <th># of Images</th>
+    </tr>
+    {% for sub in submissions %}
+    <tr>
+      <td>{{ sub.name }}</td>
+      <td>{{ sub.message }}</td>
+      <td>{{ sub.datetime }}</td>
+      <td>{{ sub.count }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</div>
+
+{% endblock %}
