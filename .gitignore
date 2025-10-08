@@ -6,3 +6,4 @@ __pycache__
 config.py
 media/*
 nohup.out
+.DS_Store
