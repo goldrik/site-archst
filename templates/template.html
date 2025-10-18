@@ -2,17 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 
 <head>
-  <meta name="generator" content="Hugo 0.109.0">
-  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <!-- <meta name="generator" content="Hugo 0.109.0"> -->
+  <!-- <link href="http://gmpg.org/xfn/11" rel="profile"> -->
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
 
-  <title>1600 Arch</title>
-
-
+  <title>1600 ARCH</title>
 
   <link rel="stylesheet" href="https://rakyll.org/css/poole.css">
   <link rel="stylesheet" href="https://rakyll.org/css/syntax.css">
@@ -21,11 +18,52 @@
   <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 
 
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png"> -->
+  <link rel="shortcut icon" type="image/*" href="favicon-16x16.png">
 
 
-  <link href="https://rakyll.org/index.xml" rel="alternate" type="application/rss+xml" title="rakyll.org" />
+  <!-- <link href="https://rakyll.org/index.xml" rel="alternate" type="application/rss+xml" title="rakyll.org" /> -->
+
+
+  <!-- FOR THE FORM IN /SLIDESHOW -->
+  <style>
+    form {
+      width: 100%;
+      min-width: 200px;
+      /* background-color: #f8f8f8; */
+      /* padding: 20px; */
+      /* border: 1px solid #ccc; */
+      /* border-radius: 5px; */
+    }
+
+    legend {
+      font-size: 1.2rem;
+      font-weight: bold;
+      /* margin-bottom: 10px; */
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #888888;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body class="layout-reverse">
@@ -37,29 +75,38 @@
           <h1>1600 Arch</h1>
         </a>
         <p class="lead">
-          Our Humble Home
+          Our Humble Home<br>
+          <span style="font-size: 0.8em">
+            in <a href="https://openmaps.phila.gov/">Philadelphia</a> <a
+              href="https://theonion.com/report-some-people-live-in-pennsylvania-1819575831/">PA</a>
+          </span>
         </p>
         <p>by <a href="/">JBD</a></p>
       </div>
 
       <ul class="sidebar-nav">
         <li><a href="/">Home</a> </li>
-        <li><a href="/about">About</a></li>
-        <li><a href="https://github.com/goldrik">GitHub</a></li>
+        <li><a href="/">Slideshow</a></li>
+        <li><a href="/about">Lights</a></li>
+        <li><a href="/about">Webcam</a></li>
+        <li><a href="https://github.com/goldrik">Source</a></li>
       </ul>
 
     </div>
   </div>
 
 
-
   <div class="content container">
-    <div class="posts">
+    <div>
+      <div>
+        <h1 style="font-style: italic;">
+          {% block title %}{% endblock %}
+        </h1>
 
-{% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
+      </div>
     </div>
-  </div>
 
 </body>
 
