@@ -3,7 +3,9 @@
 __pycache__
 *.pyc
 
-config.py
+*.db
 media/*
+templates/ex/*
+config.py
 nohup.out
 .DS_Store
