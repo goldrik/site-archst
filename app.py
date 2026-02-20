@@ -69,6 +69,11 @@ def index():
 def about():
     return render_template("about.html")
 
+def init_dirs():
+    os.makedirs('media/slideshow', exist_ok=True)
+    os.makedirs('media/webcam', exist_ok=True)
+
+
 # SQLITE database names
 DB_REGISTER = "register"
 DB_SLIDESHOW = "slideshow"
@@ -368,5 +373,6 @@ def uploaded_file(filename, folder):
 
 
 if __name__ == "__main__":
+    init_dirs()
     init_dbs()
     app.run(host="0.0.0.0", port=5454, debug=True)
