@@ -1,0 +1,57 @@
+{% extends 'template.html' %}
+
+{% block title %}
+Light Control
+{% endblock %}
+
+
+{% block content %}
+
+<p>Mess with our house (and sanity)</p>
+
+{% if devices %}
+
+<div style="display: flex; align-items: center; gap: 20px; margin: 20px 0;">
+    <label for="brightness">Brightness</label>
+    <input type="range" id="brightness" min="0" max="100" value="{{ brightness }}" onchange="document.getElementById('brightness-value').innerText = this.value">
+    <span id="brightness-value" > {{ brightness }} </span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 20px; margin: 20px 0;">
+    <label for="color">Color</label>
+    <input type="color" id="color" value={{ color }}>
+</div>
+<div style="display: flex; gap: 20px; margin: 20px 0;">
+    <button class="btn" id="reset-btn">Reset</button>
+    <button class="btn" id="update-btn">Update</button>
+    <button class="btn" id="power-btn">I / O</button>
+</div>
+
+{% else %}
+
+<p>NO DEVICES FOUND</p>
+
+{% endif %}
+
+<script>
+
+  function sendAction(action) {
+    fetch('/lights', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: action,
+        brightness: parseInt(brightness.value),
+        color: document.getElementById('color').value
+      })
+    });
+  }
+
+  document.getElementById('reset-btn').addEventListener('click', () => sendAction('reset'));
+  document.getElementById('update-btn').addEventListener('click', () => sendAction('update'));
+  document.getElementById('power-btn').addEventListener('click', () => sendAction('power'));
+</script>
+
+
+{% endblock %}
+
