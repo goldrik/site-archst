@@ -60,67 +60,9 @@ def get_free_space_mb(path="."):
 def inject_random_url():
     return dict(random_url=random.choice(aurik_urls))
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    global submissions
-    if request.method == "POST":
-        name = request.form.get("name", "").strip()
-        message = request.form.get("message", "").strip()
-        message = request.form.get("password", "")
-        files = request.files.getlist("images")
-
-        if not name or not message or not files:
-            flash("Name, message, and at least one image are required.")
-            return redirect(url_for("index"))
-
-        uploaded_files = []
-        for file in files:
-            if file and allowed_file(file.filename):
-                # filename = datetime.datetime.now().strftime("%Y%m%d%H%M%S_") + secure_filename(file.filename)
-                filename = (
-                    datetime.datetime.now().strftime("%Y%m%d%H%M%S_") + file.filename
-                )
-                filepath = os.path.join(
-                    os.path.dirname(os.path.abspath(__file__)),
-                    app.config["DIR_UPLOADS_SLIDESHOW"],
-                    filename,
-                )
-                file.save(filepath)
-                uploaded_files.append(filename)
-            else:
-                flash("Invalid file type.")
-                return redirect(url_for("index"))
-
-        # Check if there is still free disk space AFTER saving
-        if get_free_space_mb(app.config["DIR_UPLOADS_SLIDESHOW"]) <= 0:
-            # rollback the saved files
-            for f in uploaded_files:
-                os.remove(os.path.join(app.config["DIR_UPLOADS_SLIDESHOW"], f))
-            flash("Error: Not enough disk space. Upload rejected.")
-            return redirect(url_for("index"))
-
-        submissions.append(
-            {
-                "name": name,
-                "message": message,
-                "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "count": len(uploaded_files),
-                "files": uploaded_files,
-            }
-        )
-        return redirect(url_for("index"))
-
-    # Show latest images first
-    # images = []
-    # for sub in reversed(submissions):
-    #     for f in sub["files"]:
-    #         images.append(f)
-    # image = submissions[0]["files"][0]
-    # image = "20251008042826_call_your_mother.jpg"
-    # image = "media/slideshow/call_your_mother.jpg"
-    image = "call_your_mother.jpg"
-
-    return render_template("index.html", submissions=submissions, image=image)
+    return render_template("index.html")
 
 
 @app.route("/about")
@@ -215,9 +157,67 @@ def register():
 
 
 
-@app.route("/slideshow")
+@app.route("/slideshow", methods=["GET", "POST"])
 def slideshow():
-    return render_template("slideshow.html")
+    global submissions
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        message = request.form.get("message", "").strip()
+        message = request.form.get("password", "")
+        files = request.files.getlist("images")
+
+        if not name or not message or not files:
+            flash("Name, message, and at least one image are required.")
+            return redirect(url_for("index"))
+
+        uploaded_files = []
+        for file in files:
+            if file and allowed_file(file.filename):
+                # filename = datetime.datetime.now().strftime("%Y%m%d%H%M%S_") + secure_filename(file.filename)
+                filename = (
+                    datetime.datetime.now().strftime("%Y%m%d%H%M%S_") + file.filename
+                )
+                filepath = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)),
+                    app.config["DIR_UPLOADS_SLIDESHOW"],
+                    filename,
+                )
+                file.save(filepath)
+                uploaded_files.append(filename)
+            else:
+                flash("Invalid file type.")
+                return redirect(url_for("index"))
+
+        # Check if there is still free disk space AFTER saving
+        if get_free_space_mb(app.config["DIR_UPLOADS_SLIDESHOW"]) <= 0:
+            # rollback the saved files
+            for f in uploaded_files:
+                os.remove(os.path.join(app.config["DIR_UPLOADS_SLIDESHOW"], f))
+            flash("Error: Not enough disk space. Upload rejected.")
+            return redirect(url_for("index"))
+
+        submissions.append(
+            {
+                "name": name,
+                "message": message,
+                "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "count": len(uploaded_files),
+                "files": uploaded_files,
+            }
+        )
+        return redirect(url_for("index"))
+
+    # Show latest images first
+    # images = []
+    # for sub in reversed(submissions):
+    #     for f in sub["files"]:
+    #         images.append(f)
+    # image = submissions[0]["files"][0]
+    # image = "20251008042826_call_your_mother.jpg"
+    # image = "media/slideshow/call_your_mother.jpg"
+    image = "call_your_mother.jpg"
+
+    return render_template("slideshow.html", submissions=submissions, image=image)
 
 
 async def get_devices():
@@ -304,9 +304,9 @@ def add_date_text(img, dt):
     # Orange/amber color like old disposable camera date stamps
     color = (255, 64, 0)
     try:
-        # font = ImageFont.truetype("/Users/sarker/Downloads/fonts-DSEG_v046/DSEG7-Classic/DSEG7Classic-Bold.ttf", font_size)
-        font = ImageFont.truetype('/Users/sarker/Downloads/14_segmentled/14 Segment LED.ttf', font_size)
-        # font = ImageFont.truetype('/Users/sarker/Downloads/14-segment.ttf/14-segment.ttf', font_size)
+        # font = ImageFont.truetype('./media/fonts/DSEG7Classic-Regular.ttf', font_size)
+        font = ImageFont.truetype('./media/fonts/14 Segment LED.ttf', font_size)
+        # font = ImageFont.truetype('./media/fonts/14-segment.ttf', font_size)
     except:
         font = ImageFont.load_default()
 

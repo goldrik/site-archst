@@ -5,6 +5,8 @@ __pycache__
 
 *.db
 media/*
+!media/icons
+!media/fonts
 templates/ex/*
 config.py
 nohup.out
