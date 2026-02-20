@@ -1,0 +1,34 @@
+{% extends 'template.html' %}
+
+{% block title %}
+Webcam
+{% endblock %}
+
+
+{% block content %}
+
+<p>Spy on us</p>
+
+<form action="" method="post">
+  <button class="btn" id="capture-btn" type="submit">Capture</button>
+</form>
+
+{% if image %}
+
+<div class="image-container">
+  <!-- <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Uploaded image"> -->
+  <!-- <img src="{{ url_for('uploaded_file', filename=image, folder='slideshow') }}" alt="Uploaded image">
+  <p>Image path: {{ url_for('uploaded_file', filename=image, folder='slideshow') }}</p> -->
+  <img src="/webcam/{{ image }}" alt="Uploaded image">
+</div>
+
+<div style="display: flex; justify-content: space-between; margin: 4px 0;">
+  <p style="font-family: monospace;">{{ image }}</p>
+  <p style="font-family: monospace;">{{ dt_str }}</p>
+</div>
+
+{% endif %}
+
+
+{% endblock %}
+
