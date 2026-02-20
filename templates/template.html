@@ -12,63 +12,36 @@
   <title>1600 ARCH</title>
 
   <link rel="stylesheet" href="https://rakyll.org/css/poole.css">
-  <link rel="stylesheet" href="https://rakyll.org/css/syntax.css">
+  <!-- <link rel="stylesheet" href="https://rakyll.org/css/syntax.css"> -->
   <link rel="stylesheet" href="https://rakyll.org/css/hyde.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-  <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
 
+  <!-- <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet"> -->
 
-  <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png"> -->
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+
+  <!-- <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=M+PLUS+Code+Latin:wght@100..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
   <link rel="shortcut icon" type="image/*" href="favicon-16x16.png">
 
 
   <!-- <link href="https://rakyll.org/index.xml" rel="alternate" type="application/rss+xml" title="rakyll.org" /> -->
 
 
-  <!-- FOR THE FORM IN /SLIDESHOW -->
-  <style>
-    form {
-      width: 100%;
-      min-width: 200px;
-      /* background-color: #f8f8f8; */
-      /* padding: 20px; */
-      /* border: 1px solid #ccc; */
-      /* border-radius: 5px; */
-    }
-
-    legend {
-      font-size: 1.2rem;
-      font-weight: bold;
-      /* margin-bottom: 10px; */
-    }
-
-    input[type="text"],
-    input[type="password"],
-    textarea {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-      color: #fff;
-      background-color: #888888;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 
 <body class="layout-reverse">
   <div class="sidebar">
     <div class="container sidebar-sticky">
+
+      <div class="image-container">
+        <!-- <img src="/media/icons/favicon.jpg" alt="ket.jpg" title="baka neko"> -->
+        <!-- <img src="{{ url_for('uploaded_file', filename='favicon.jpg', folder='icons') }}" alt="ket.jpg" title="baka neko"> -->
+        <!-- <img src="favicon.jpg" alt="ket.jpg" title="baka neko"> -->
+        <img src="/icons/favicon.jpg" alt="ket.jpg" title="baka neko">
+      </div>
 
       <div class="sidebar-about">
         <a href="/">
@@ -81,15 +54,16 @@
               href="https://theonion.com/report-some-people-live-in-pennsylvania-1819575831/">PA</a>
           </span>
         </p>
-        <p>by <a href="/">JBD</a></p>
+        <p>by <a href="{{ random_url }}">Aurik Sarker</a></p>
       </div>
 
       <ul class="sidebar-nav">
         <li><a href="/">Home</a> </li>
+        <li><a href="/register">Register</a></li>
         <li><a href="/">Slideshow</a></li>
-        <li><a href="/about">Lights</a></li>
-        <li><a href="/about">Webcam</a></li>
-        <li><a href="https://github.com/goldrik">Source</a></li>
+        <li><a href="/lights">Lights</a></li>
+        <li><a href="/webcam">Webcam</a></li>
+        <li><a href="https://github.com/goldrik/site-archst">Source</a></li>
       </ul>
 
     </div>
@@ -109,5 +83,79 @@
     </div>
 
 </body>
+
+
+
+<!-- FOR THE FORM IN /SLIDESHOW -->
+<style>
+  body {
+    font-family: 'Lato', serif;
+  }
+
+  form {
+    width: 100%;
+    min-width: 200px;
+    /* background-color: #f8f8f8; */
+    /* padding: 20px; */
+    /* border: 1px solid #ccc; */
+    /* border-radius: 5px; */
+  }
+
+  legend {
+    font-size: 1.2rem;
+    font-weight: bold;
+    /* margin-bottom: 10px; */
+  }
+
+  input[type="text"],
+  input[type="password"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #888888;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #888888;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  table {
+    font-size: 0.8rem;
+    border-collapse: collapse;
+    width: 150%;
+    border-spacing: 0;
+  }
+  td {
+    padding: 8px;
+    background-color: #f8f8f8;
+  }
+  th {
+    padding: 8px;
+    background-color: #888888;
+    color: white;
+  }
+</style>
+
 
 </html>
