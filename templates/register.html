@@ -1,0 +1,80 @@
+{% extends 'template.html' %}
+
+{% block title %}
+Guest Register
+{% endblock %}
+
+
+{% block content %}
+
+<p>Leave your mark on history</p>
+
+<!-- <form method="post" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="Name" required><br>
+  <input type="text" name="message" placeholder="Write a message" required><br>
+  <input type="text" name="password" placeholder="Password" required><br>
+  <input type="file" name="images" accept="image/*" multiple required><br>
+  <input type="submit" value="Upload">
+</form> -->
+
+<form method="post">
+  <fieldset>
+    <legend>Page</legend>
+    <input type="text" id="name" name="name" placeholder="Name (Optional)" />
+    <textarea rows="5" id="message" name="message" placeholder="Message" autocomplete="off"></textarea>
+    <input type="password" id="password" name="password" placeholder="Password" />
+    <input type="submit" value="Sign" />
+  </fieldset>
+</form>
+
+
+<div class="flash-message">
+  <div class="msg-wrapper">
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <p class="{{category}} message">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+
+<h3>Book</h3>
+{% if messages %}
+<table>
+  <thead>
+    <tr>
+      <th>Submitted</th>
+      <th>Name</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for msg in messages %}
+    <tr>
+      <td>{{ msg.timestamp | format_datetime }}</td>
+      <td>{{ msg.name }}</td>
+      <td>{{ msg.message }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No Visitors >:(</p>
+{% endif %}
+
+
+{% endblock %}
+
+
+<script>
+  document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const pw = prompt('Enter password:');
+    if (pw) {
+      document.getElementById('password').value = pw;
+      this.submit();
+    }
+  });
+</script>
