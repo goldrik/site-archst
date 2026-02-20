@@ -1,0 +1,65 @@
+{% extends 'template.html' %}
+
+{% block title %}
+Slideshow
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<p>This is <a href="https://www.google.com/">just google</a>. </p>
+
+
+<!-- <form method="post" enctype="multipart/form-data">
+  <input type="text" name="name" placeholder="Name" required><br>
+  <input type="text" name="message" placeholder="Write a message" required><br>
+  <input type="text" name="password" placeholder="Password" required><br>
+  <input type="file" name="images" accept="image/*" multiple required><br>
+  <input type="submit" value="Upload">
+</form> -->
+
+<form>
+  <fieldset>
+    <legend>Image Upload</legend>
+    <input type="text" id="firstName" name="FirstName" placeholder="Name" />
+    <textarea rows="5" id="message" placeholder="Message"></textarea>
+    <input type="password" id="password" name="password" placeholder="Password" />
+    <!-- <input type="submit" value="Upload" /> -->
+    <input type="submit" value="INCOMPLETE" />
+  </fieldset>
+</form>
+
+</html>
+
+
+<h3>Latest Image</h3>
+<div class="image-container">
+  <!-- <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Uploaded image"> -->
+  <!-- <img src="{{ url_for('uploaded_file', filename=image, folder='slideshow') }}" alt="Uploaded image">
+  <p>Image path: {{ url_for('uploaded_file', filename=image, folder='slideshow') }}</p> -->
+  <img src="/slideshow/{{ image }}" alt="Uploaded image">
+  <p>Image path: {{ image }}</p>
+</div>
+
+<h3>Submission Log</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Message</th>
+    <th>Date/Time</th>
+    <th># of Images</th>
+  </tr>
+  {% for sub in submissions %}
+  <tr>
+    <td>{{ sub.name }}</td>
+    <td>{{ sub.message }}</td>
+    <td>{{ sub.datetime }}</td>
+    <td>{{ sub.count }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+{% endblock %}
