@@ -30,7 +30,7 @@ app.config.from_object("config")
 # print('Directory: ', app.config['DIR_UPLOADS_SLIDESHOW'])
 
 # app.config["DIR_UPLOADS_SLIDESHOW"] = UPLOAD_FOLDER
-os.makedirs(app.config["DIR_UPLOADS_SLIDESHOW"], exist_ok=True)
+# os.makedirs(app.config["DIR_UPLOADS_SLIDESHOW"], exist_ok=True)
 
 # In-memory log of uploads
 submissions = []
