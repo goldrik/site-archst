@@ -351,7 +351,8 @@ def asdf():
     dt = datetime.datetime.now()
     fn = 'webcam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
     fn = os.path.join('./media/webcam', fn)
-    cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
+    # cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
+    cmd = ['rpicam-still', '--rotation',  '180', '--immediate', '-o', fn]
     a = subprocess.run(cmd, capture_output=True, text=True)
     print(a)
     print(os.listdir('./media/webcam'))
