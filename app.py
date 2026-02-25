@@ -318,8 +318,8 @@ def add_date_text(img, dt):
     color = (192, 32, 0)
     try:
         # font = ImageFont.truetype('./media/fonts/DSEG7Classic-Regular.ttf', font_size)
-        # font = ImageFont.truetype('./media/fonts/14 Segment LED.ttf', font_size)
-        font = ImageFont.truetype('./media/fonts/14-segment.ttf', font_size)
+        font = ImageFont.truetype('./media/fonts/14 Segment LED.ttf', font_size)
+        # font = ImageFont.truetype('./media/fonts/14-segment.ttf', font_size)
     except:
         font = ImageFont.load_default()
 
