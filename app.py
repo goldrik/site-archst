@@ -315,11 +315,11 @@ def add_date_text(img, dt):
     # font_size = 42
     font_size = round( min(width, height) / 1000 * 42 )
     # Orange/amber color like old disposable camera date stamps
-    color = (255, 64, 0)
+    color = (192, 32, 0)
     try:
-        font = ImageFont.truetype('./media/fonts/DSEG7Classic-Regular.ttf', font_size)
+        # font = ImageFont.truetype('./media/fonts/DSEG7Classic-Regular.ttf', font_size)
         # font = ImageFont.truetype('./media/fonts/14 Segment LED.ttf', font_size)
-        # font = ImageFont.truetype('./media/fonts/14-segment.ttf', font_size)
+        font = ImageFont.truetype('./media/fonts/14-segment.ttf', font_size)
     except:
         font = ImageFont.load_default()
 
