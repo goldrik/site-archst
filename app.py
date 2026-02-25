@@ -317,8 +317,8 @@ def add_date_text(img, dt):
     # Orange/amber color like old disposable camera date stamps
     color = (255, 64, 0)
     try:
-        # font = ImageFont.truetype('./media/fonts/DSEG7Classic-Regular.ttf', font_size)
-        font = ImageFont.truetype('./media/fonts/14 Segment LED.ttf', font_size)
+        font = ImageFont.truetype('./media/fonts/DSEG7Classic-Regular.ttf', font_size)
+        # font = ImageFont.truetype('./media/fonts/14 Segment LED.ttf', font_size)
         # font = ImageFont.truetype('./media/fonts/14-segment.ttf', font_size)
     except:
         font = ImageFont.load_default()
@@ -327,8 +327,8 @@ def add_date_text(img, dt):
     bbox = draw.textbbox((0, 0), datestr, font=font)
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
-    x = width - text_w - 36
-    y = height - text_h - 36
+    x = width - text_w - font_size
+    y = height - text_h - font_size
 
     draw.text((x, y), datestr, fill=color, font=font)
 
@@ -351,7 +351,7 @@ def fn_to_datetime(fn):
 def webcam():
     if request.method == "POST":
         dt = datetime.datetime.now()
-        fn = 'webcam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
+        fn = 'rpicam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
         fn = os.path.join('./media/webcam', fn)
         # cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
         cmd = ['rpicam-still', '--rotation',  '180', '--immediate', '-o', fn]
