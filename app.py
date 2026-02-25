@@ -312,8 +312,8 @@ def add_date_text(img, dt):
 
     datestr = dt.strftime('%m %d \'%y %I:%M %p')
 
-    # Try to use a monospace font for that old-camera look
-    font_size = 42
+    # font_size = 42
+    font_size = round( min(width, height) / 1000 * 42 )
     # Orange/amber color like old disposable camera date stamps
     color = (255, 64, 0)
     try:
@@ -346,16 +346,6 @@ def fn_to_datetime(fn):
     fmt = '%Y%m%d%H%M%S'
     return datetime.datetime.strptime(dt_str, fmt)
 
-
-def asdf():
-    dt = datetime.datetime.now()
-    fn = 'webcam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
-    fn = os.path.join('./media/webcam', fn)
-    # cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
-    cmd = ['rpicam-still', '--rotation',  '180', '--immediate', '-o', fn]
-    a = subprocess.run(cmd, capture_output=True, text=True)
-    print(a)
-    print(os.listdir('./media/webcam'))
 
 @app.route("/webcam", methods=["GET", "POST"])
 def webcam():
