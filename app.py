@@ -362,7 +362,8 @@ def webcam():
         dt = datetime.datetime.now()
         fn = 'webcam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
         fn = os.path.join('./media/webcam', fn)
-        cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
+        # cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
+        cmd = ['rpicam-still', '--rotation',  '180', '--immediate', '-o', fn]
         # cmd = f'rpicam-still --rotation 180 --shutter 3s --nopreview --immediate -o {fn}'
 
         try: 
