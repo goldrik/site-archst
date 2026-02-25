@@ -330,6 +330,7 @@ def add_date_text(img, dt):
     x = width - text_w - font_size
     y = height - text_h - font_size
 
+    draw.text((x, y), ' '*len(datestr), fill=(255, 255, 255), font=font)
     draw.text((x, y), datestr, fill=color, font=font)
 
     return img
