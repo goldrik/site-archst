@@ -7,6 +7,7 @@ import sqlite3
 import random
 from PIL import Image, ImageDraw, ImageFont
 import subprocess
+import colorsys
 
 # from werkzeug.utils import secure_filename
 import shutil
@@ -243,6 +244,13 @@ async def turn_on_off(light, on_off):
     else:
         await light.turn_off()
 
+# HSV values between 0 and 1
+def hex_to_hsv(hex):
+    # Remove first #
+    hex = hex.strip().lstrip('#')
+    r, g, b = tuple(int(hex[i:i+2], 16) / 255 for i in (0, 2, 4))
+    return colorsys.rgb_to_hsv(r, g, b)
+
 @app.route("/lights", methods=["GET", "POST"])
 def lights():
     devices = asyncio.run(get_devices())
@@ -345,6 +353,7 @@ def webcam():
         fn = 'webcam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
         fn = os.path.join('./media/webcam', fn)
         cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
+        # cmd = f'rpicam-still --rotation 180 --shutter 3s --nopreview --immediate -o {fn}'
 
         try: 
             subprocess.run(cmd, capture_output=True, text=True)
@@ -356,11 +365,13 @@ def webcam():
     if files:
         files.sort()
         latest_webcam = files[-1]
+
+        dt_str = fn_to_datetime(latest_webcam)
+        dt_str = dt_str.strftime('%Y %b %d %a, %H:%M:%S')
+
     else:
         latest_webcam = None
-
-    dt_str = fn_to_datetime(latest_webcam)
-    dt_str = dt_str.strftime('%Y %b %d %a, %H:%M:%S')
+        dt_str = None
 
     return render_template("webcam.html", image=latest_webcam, dt_str=dt_str)
 
