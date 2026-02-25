@@ -327,8 +327,8 @@ def add_date_text(img, dt):
     bbox = draw.textbbox((0, 0), datestr, font=font)
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
-    x = width - text_w - 40
-    y = height - text_h - 30
+    x = width - text_w - 36
+    y = height - text_h - 36
 
     draw.text((x, y), datestr, fill=color, font=font)
 
@@ -346,6 +346,16 @@ def fn_to_datetime(fn):
     fmt = '%Y%m%d%H%M%S'
     return datetime.datetime.strptime(dt_str, fmt)
 
+
+def asdf():
+    dt = datetime.datetime.now()
+    fn = 'webcam_' +  datetime_to_suffix(dt - datetime.timedelta(hours=5)) + '.jpg'
+    fn = os.path.join('./media/webcam', fn)
+    cmd = f'rpicam-still --rotation 180 --immediate -o {fn}'
+    a = subprocess.run(cmd, capture_output=True, text=True)
+    print(a)
+    print(os.listdir('./media/webcam'))
+
 @app.route("/webcam", methods=["GET", "POST"])
 def webcam():
     if request.method == "POST":
@@ -357,9 +367,13 @@ def webcam():
 
         try: 
             subprocess.run(cmd, capture_output=True, text=True)
+            img_orig = Image.open(fn)
         except:
-            img = add_date_text(default_image(), dt)
-            img.save(fn)
+            # If the webcam did not run properly, load the default black image
+            img_orig = default_image()
+
+        img = add_date_text(img_orig, dt)
+        img.save(fn)
 
     files = os.listdir("./media/webcam")
     if files:
