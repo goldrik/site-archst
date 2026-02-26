@@ -227,7 +227,8 @@ def slideshow():
 
 
 async def get_devices():
-    return await Discover.discover(target="192.168.1.255")
+    # return await Discover.discover(target="192.168.1.255")
+    return await Discover.discover()
 
 async def get_state(light):
     await light.update()
@@ -254,9 +255,12 @@ def hex_to_hsv(hex):
 @app.route("/lights", methods=["GET", "POST"])
 def lights():
     devices = asyncio.run(get_devices())
+    print(devices)
 
     light = None
-    state = {'brightness': 50, 'color': '#ffffff'}
+    state = {'on_off': 0, 'hue': 0, 'saturation': 0, 'color_temp': 2500, 'brightness': 50, 'mode': 'normal'}
+    color = '#888888'
+
     on_off = False
 
     if devices:
@@ -264,8 +268,6 @@ def lights():
         state, on_off = asyncio.run(get_state(light))
         print(state)
         print(on_off)
-
-    # devices = True
 
     if request.method == "POST":
         data = request.get_json()
@@ -281,13 +283,18 @@ def lights():
             color = data.get("color")
             print(f"Action: {action}, Brightness: {brightness}, Color: {color}")
 
+
         if action == 'power':
             on_off = not on_off
             print(f"Action: {action}")
 
         else:
             state['brightness'] = brightness
-            # state['color'] = 
+            h, s, v = hex_to_hsv(color)
+            print(h, s, v)
+            # state['hue'] = h
+            # state['saturation'] = s
+            # state['brightness'] = v
             on_off = True
             
             asyncio.run(set_state(light, state))
@@ -296,7 +303,7 @@ def lights():
 
         # return jsonify({"status": "ok"})
 
-    return render_template("lights.html", devices=devices, brightness=state['brightness'], color=state['color'])
+    return render_template("lights.html", devices=devices, brightness=state['brightness'], color=color)
 
 
 
